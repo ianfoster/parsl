@@ -52,10 +52,11 @@ pragma worktypedef controller;
 }
 
 
-make_queues("tcp://127.0.0.1:5557", "tcp://127.0.0.1:5558") =>
+x = make_queues("tcp://127.0.0.1:5557", "tcp://127.0.0.1:5558") =>
   trace("Queue return : %s"% x) =>
-  get_tasks() =>
-  trace("Task get : %s" % y);
+  y = get_tasks() =>
+  trace("Task get : %s" % y) =>
+  loop();
 
 loop()
 {
@@ -88,7 +89,3 @@ loop()
         */
     }
 }
-
-//loop();
-
-
