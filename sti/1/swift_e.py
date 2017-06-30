@@ -39,6 +39,7 @@ Results_Q = None
 
 def log(token, s):
     print("python: %-10s %s" % (token+":", s))
+    sys.stdout.flush()
 
 def make_queues(jobs_q_url, results_q_url):
 
@@ -89,10 +90,11 @@ def get_tasks():
     '''
     global Task_Q
 
-    print("Task_Q get called")
+    log("get_tasks()", "Task_Q.get()...")
     result = None
     try:
         result = Task_Q.get(timeout=4)
+        log("get_tasks()", "Task_Q.get() done.")
 
         encoded_buf = str(b64encode(pickle.dumps(result)))
 
@@ -100,6 +102,7 @@ def get_tasks():
 
     except queue.Empty:
         #return str(Task_Q)
+        log("get_tasks()", "Task_Q is empty!")
         return "DONE"
 
     #result = "Fooo"
@@ -113,6 +116,8 @@ def task(string_bufs):
     be pickled are written
 
     """
+
+    log("task", "")
 
     #all_names = dir(__builtins__)
     user_ns   = globals()#locals()
@@ -206,6 +211,7 @@ def task(string_bufs):
 
 def put_results(results):
     global Results_Q
+    log("put_results()", str(results))
     result = Results_Q.put(results)
     return "True"
 
