@@ -9,4 +9,3 @@ export PYTHONPATH=/scratch/midway/yadunand/swift-e-lab:/scratch/midway/yadunand/
 
 export TURBINE_LOG=1
 export TURBINE_CONTROLLER_WORKERS=1
-export TURBINE_SLAVES_WORKERS=4
