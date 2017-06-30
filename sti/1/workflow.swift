@@ -39,7 +39,7 @@ pragma worktypedef controller;
 
 (boolean result) put_results(string results)
 {
-    python_persist("import swift_e",
+    python_persist_controller("import swift_e",
                    "swift_e.put_results(\"%s\")" % results) =>
         result = true;
 }
