@@ -9,7 +9,7 @@ import time
 import shutil
 import argparse
 
-parsl.set_stream_logger()
+#parsl.set_stream_logger()
 #workers = ThreadPoolExecutor(max_workers=4)
 workers = TurbineExecutor(jobs_q_url="tcp://127.0.0.1:5557",
                           results_q_url="tcp://127.0.0.1:5558")
@@ -62,6 +62,8 @@ if __name__ == '__main__' :
         parsl.set_stream_logger()
 
     x = parallel_for(int(args.count))
+
+    #print([i.done() for i in x])
 
     final = [i.result() for i in x]
     print(final)
