@@ -5,11 +5,11 @@ import io;
 import string;
 import location;
 import python;
-pragma worktypedef resident_work;
+pragma worktypedef controller;
 
 
-@dispatch=CONTROL
-(string output) python_persist(string code, string expr) "turbine" "0.1.0"
+@dispatch=CONTROLLER
+(string output) python_persist_controller(string code, string expr) "turbine" "0.1.0"
 [ "set <<output>> [ turbine::python 1 <<code>> <<expr>> ]" ];
 
 
@@ -20,13 +20,13 @@ pragma worktypedef resident_work;
 
 (string tasks) get_tasks()
 {
-    tasks = python_persist("import swift_e",
+    tasks = python_persist_controller("import swift_e",
                            "swift_e.get_tasks()");
 }
 
 (string result) make_queues(string jobs_q, string results_q)
 {
-    result = python_persist("import swift_e",
+    result = python_persist_controller("import swift_e",
                             "swift_e.make_queues(\"%s\", \"%s\")" % (jobs_q, results_q) );
                             //"test.test_parallel_for(100)");
 }
@@ -52,9 +52,10 @@ pragma worktypedef resident_work;
 }
 
 
-x = make_queues("tcp://127.0.0.1:5557", "tcp://127.0.0.1:5558") => trace("Queue return : %s"% x);
-
-y = get_tasks() => trace("Task get : %s" % y);
+make_queues("tcp://127.0.0.1:5557", "tcp://127.0.0.1:5558") =>
+  trace("Queue return : %s"% x) =>
+  get_tasks() =>
+  trace("Task get : %s" % y);
 
 loop()
 {
