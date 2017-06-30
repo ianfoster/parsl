@@ -37,7 +37,7 @@ Task_Q = None
 Results_Q = None
 
 
-def msg(token, s):
+def log(token, s):
     print("python: %-10s %s" % (token+":", s))
 
 def make_queues(jobs_q_url, results_q_url):
