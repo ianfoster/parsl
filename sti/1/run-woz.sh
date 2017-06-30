@@ -18,6 +18,7 @@ export PYTHONPATH=$PY/lib/python3.6/site-packages
 source ./setup_env.sh
 
 which swift-t python3
+echo
 
 swift-t -l -n 6 workflow.swift &
 sleep 5
