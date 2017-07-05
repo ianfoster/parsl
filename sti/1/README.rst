@@ -7,6 +7,9 @@ over 0mq. The 0mq code is `zmq_pipe.py`.
 Results
 -------
 
+Performance measurements done on swift.rcc.uchicago.edu. Tests were done on a single node with Intel(R) Xeon(R) CPU X5675 @ 3.07GHz.
+The swift-t executor was run with 6 MPI ranks, with 4 worker ranks and 1 controller rank.
+
 +------------+------------+--------------------+
 | Task Count | TTC(s)     | Task Rate(Tasks/s) |
 +============+============+====================+
