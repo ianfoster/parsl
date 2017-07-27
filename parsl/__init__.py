@@ -31,7 +31,10 @@ from parsl.version import VERSION
 from parsl.app.app import App
 #from parsl.app.executors import ThreadPoolExecutor, ProcessPoolExecutor
 from parsl.executors.threads import ThreadPoolExecutor
+from parsl.executors.swift_e import TurbineExecutor
 from parsl.executors.ipp import IPyParallelExecutor
+
+
 import logging
 #import parsl.app.errors
 
