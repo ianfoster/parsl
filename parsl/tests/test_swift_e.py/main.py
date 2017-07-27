@@ -63,7 +63,10 @@ if __name__ == '__main__' :
 
     x = parallel_for(int(args.count))
 
-    #print([i.done() for i in x])
+
+    #for  i in range(4):
+    #    print([i.done() for i in x])
+    #    time.sleep(0.5)
 
     final = [i.result() for i in x]
     print(final)

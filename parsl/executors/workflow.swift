@@ -64,7 +64,7 @@ loop()
 
         printf("In loop");
         boolean c;
-        tasks = get_tasks() => trace("tasks : %s" % tasks);
+        tasks = get_tasks() ; //=> trace("tasks : %s" % tasks);
         if (tasks == "EMPTY") {
             printf("Empty....");
             c = true;
