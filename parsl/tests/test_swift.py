@@ -11,7 +11,7 @@ from parsl.executors.swift_t import *
 
 def foo(x, y):
     z = x*y
-    print("Print hi ", z)
+    #print("Print hi ", z)
     return x*y
 
 def slow_foo(x, y):
@@ -44,10 +44,27 @@ def test_except():
 
     print("done")
 
+
+def test_loop(count):
+    print("Start")
+    tex = TurbineExecutor()
+    fus = {}
+    for i in range(count):
+        fus[i] = tex.submit(foo, i, 10)
+
+    for i in fus:
+        print (i, fus[i])
+        print("result : ", fus[i].result())
+
+    print("done")
+
+
+
 if __name__ == "__main__":
 
 
-    test_simple()
+    #test_simple()
+    test_loop(100)
     #test_except()
     exit(0)
     futs = {}
