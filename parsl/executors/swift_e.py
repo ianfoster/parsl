@@ -22,7 +22,7 @@ from ipyparallel.serialize import serialize_object, deserialize_object
 
 import parsl
 from parsl.executors.base import ParslExecutor
-import zmq_pipes
+import parsl.executors.zmq_pipes
 
 logger = logging.getLogger(__name__)
 
