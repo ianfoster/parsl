@@ -2,6 +2,8 @@ import logging
 import time
 import math
 
+from parsl.executors.ipp import IPyParallelExecutor
+
 logger = logging.getLogger(__name__)
 
 
@@ -178,15 +180,16 @@ class Strategy(object):
             nodes_per_block = executor.provider.nodes_per_block
             parallelism = executor.provider.parallelism
 
-            active_blocks = sum([1 for x in status if x in ('RUNNING',
-                                                            'SUBMITTING',
-                                                            'PENDING')])
+            running = sum([1 for x in status if x == 'RUNNING'])
+            submitting = sum([1 for x in status if x == 'SUBMITTING'])
+            pending = sum([1 for x in status if x == 'PENDING'])
+            active_blocks = running + submitting + pending
             active_slots = active_blocks * tasks_per_node * nodes_per_block
 
-            # import pdb; pdb.set_trace()
-            logger.debug("Tasks:{} Slots:{} Parallelism:{}".format(len(active_tasks),
-                                                                   active_slots,
-                                                                   parallelism))
+            logger.debug("There are {} running, {} submitting, and {} pending blocks".format(
+                running, submitting, pending))
+            if isinstance(executor, IPyParallelExecutor):
+                logger.debug("There are {} connected engines".format(len(executor.executor)))
 
             # Case 1
             # No tasks.
